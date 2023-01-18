@@ -9,7 +9,11 @@ import morgan from 'morgan'; //node and express middleware to logs HTTP requests
 import path from 'path';
 import { fileURLToPath } from 'url';
 import authRoutes from './routes/auth.js';
+import userRoutes from './routes/users.js';
+import postRoutes from './routes/posts.js';
 import { register } from './controllers/auth.js';
+import { createPost } from './controllers/posts.js';
+import { verifyToken } from './middleware/auth.js';
 
 /* Configurations */
 const __filename = fileURLToPath(import.meta.url); // location of the index.js file
@@ -37,17 +41,21 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage }); //save the pic, or upload the file
 
-/* ROUTES WITH FILES */
-
 /*
+ * ROUTES WITH FILES
  * this will upload picture to 'public/assets' dir
- * upload.single('picture') is a middleware which stores a singlefile into the dir
- * register is controller callback function
+ * upload.single('picture') is a middleware which stores a single file (picture) into the dir
+ * register, createPost are controller callback functions
  */
 app.post('/auth/register', upload.single('picture'), register);
+app.post('/posts', verifyToken, upload.single('picture'), createPost);
 
 /* ROUTES with `/auth` will be POINTING TO authRoutes*/
 app.use('/auth', authRoutes);
+/* ROUTES with '/users' will be pointing to userRoutes */
+app.use('/users', userRoutes);
+/* ROUTES with '/posts' will be pointing to postRoutes */
+app.use('/posts', postRoutes);
 
 /* connecting to the mongo atlas server using mongoose */
 const PORT = process.env.PORT || 6001;
