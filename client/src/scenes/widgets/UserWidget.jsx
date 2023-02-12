@@ -34,6 +34,7 @@ const UserWidget = ({ userId, picturePath }) => {
 
   useEffect(() => {
     getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (!user) return null; //if user doesn't exist we will return null
@@ -58,7 +59,7 @@ const UserWidget = ({ userId, picturePath }) => {
       >
         <FlexBetween>
           <UserImage image={picturePath} />
-          <Box>
+          <Box ml="0.25rem">
             <Typography
               variant="h4"
               color={dark}
