@@ -56,7 +56,6 @@ const Form = () => {
   const isRegister = pageType === 'register';
 
   const register = async (values, onSubmitProps) => {
-    console.log('Register Values: ', values);
     // this will helps us to save info with image
     const formData = new FormData();
     for (let value in values) {
@@ -80,7 +79,6 @@ const Form = () => {
   };
 
   const login = async (values, onSubmitProps) => {
-    console.log('Login Values: ', values);
     const loggedInResponse = await fetch('http://localhost:3001/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -88,7 +86,6 @@ const Form = () => {
     });
 
     const loggedIn = await loggedInResponse.json();
-    console.log('Naman --> loggedIn ? : ', loggedIn);
     onSubmitProps.resetForm();
     if (loggedIn) {
       dispatch(

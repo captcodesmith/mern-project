@@ -38,7 +38,6 @@ const UserWidget = ({ userId, picturePath }) => {
   }, []);
 
   if (!user) return null; //if user doesn't exist we will return null
-  console.log('User: ', user);
   const {
     firstName,
     lastName,
