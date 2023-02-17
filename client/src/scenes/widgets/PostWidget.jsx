@@ -46,7 +46,6 @@ const PostWidget = ({
     });
 
     const updatedPost = await response.json();
-    console.log('Naman --> updatedPost: ', updatedPost);
     dispatch(setPost({ post: updatedPost }));
   };
 
@@ -93,12 +92,11 @@ const PostWidget = ({
           </FlexBetween>
         </FlexBetween>
 
+        {/* //to display the actual comments */}
         <IconButton>
           <ShareOutlined />
         </IconButton>
       </FlexBetween>
-
-      {/* //to display the actual comments */}
       {isComments && (
         <Box mt="0.5rem">
           {comments.map((comment, i) => (
