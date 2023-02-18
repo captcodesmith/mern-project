@@ -39,6 +39,7 @@ const PostsWidget = ({ userId, isProfile = false }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (posts.message) return null;
   return (
     <>
       {posts.map(

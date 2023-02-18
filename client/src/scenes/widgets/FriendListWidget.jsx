@@ -13,8 +13,6 @@ const FriendListWidget = ({ userId }) => {
   const user = useSelector((state) => state.user);
   const friends = useSelector((state) => state.user.friends);
 
-  console.log('Naman --> user: ', user);
-
   const getFriends = async () => {
     const response = await fetch(
       `http://localhost:3001/users/${userId}/friends`,
